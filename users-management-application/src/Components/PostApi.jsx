@@ -1,28 +1,41 @@
-import React from 'react';
+import React from "react";
+import User from "./User";
 
 const PostApi = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    const handleSubmit = (e) =>{
+    const name = e.target.name.value;
 
-        e.preventDefault()
+    const email = e.target.email.value;
 
-        const name = e.target.name.value;
+    const user = { name, email };
 
-        const email = e.target.email.value;
+    console.log(user)
 
+    fetch("http://localhost:5005/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
 
-        console.log(name,email)
-    }
-    return (
-        <div>
-            <form onSubmit={handleSubmit} action="">
-
-                <input type="text" name='name' /><br />
-                <input type="email" name='email' /><br /><br />
-                <button>Add To Server</button>
-            </form>
-        </div>
-    );
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log("Data after Post", data));
+  };
+  return (
+    <div>
+      <form onSubmit={handleSubmit} action="">
+        <input type="text" name="name" />
+        <br />
+        <input type="email" name="email" />
+        <br />
+        <br />
+        <button>Add To Server</button>
+      </form>
+    </div>
+  );
 };
 
 export default PostApi;
