@@ -1,5 +1,4 @@
 import React from "react";
-import User from "./User";
 
 const PostApi = () => {
   const handleSubmit = (e) => {
@@ -23,6 +22,7 @@ const PostApi = () => {
     })
       .then((res) => res.json())
       .then((data) => console.log("Data after Post", data));
+      e.target.reset()
   };
   return (
     <div>
